@@ -15,5 +15,6 @@ node('docker-cloud'){
   sh "docker run -d --name jenkins-slack jenkins:slack-test"
   //sleep to wait for jenkins to come up
   sleep 8
-  sh "docker exec -t jenkins-slack java -jar /usr/share/jenkins/jenkins-extracted/jenkins-cli.jar -s http://localhost:8080 build 'slack-test' -s"
+  sh "docker exec -t jenkins-slack curl http://localhost:8080/"
+  sh "docker exec -t jenkins-slack java -jar /usr/share/jenkins/jenkins-extracted/jenkins-cli.jar -s http://localhost:8080/ build 'slack-test' -s"
 }
