@@ -21,7 +21,7 @@ node('docker-cloud'){
   //wait for jenkins to come up
   //waitUntil {
     writeFile file: 'jenkins-status', text: ''
-    sh "docker exec -t jenkins-slack curl -s -o /dev/null -w '%{http_code}' http://localhost:8080/ > jenkins-status"
+    sh "docker exec -t jenkins-slack curl -s -o /dev/null -w \'%{http_code}\' http://localhost:8080/ > jenkins-status"
     def status = readFile 'jenkins-status'
     echo status
     status == '200'
