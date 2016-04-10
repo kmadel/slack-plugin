@@ -2,7 +2,7 @@ FROM jenkins:1.642.4
 
 USER root
 RUN mkdir -p /usr/share/jenkins/jenkins-extracted && \
-  unzip -d /usr/share/jenkins/jenkins-extracted /usr/share/jenkins/jenkins.war &&\
+  unzip -j /usr/share/jenkins/jenkins.war WEB-INF/jenkins-cli.jar -d /usr/share/jenkins/jenkins-extracted &&\
   chown -R jenkins:jenkins /usr/share/jenkins/jenkins-extracted
   #rm -rf /usr/share/jenkins/jenkins-extracted
 
