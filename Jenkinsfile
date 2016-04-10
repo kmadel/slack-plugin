@@ -14,7 +14,7 @@ node('docker-cloud'){
   try {
     sh "docker rm -f jenkins-slack"
   } catch(e) {
-    echo e
+    echo "jenkins-slack image does not exist"
   }
   
   sh "docker run -d --name jenkins-slack jenkins:slack-test"
