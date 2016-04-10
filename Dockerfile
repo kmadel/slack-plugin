@@ -1,5 +1,8 @@
 FROM jenkins:1.642.4
 
+
+USER root
+RUN chmod 777 /var/jenkins_home
 USER jenkins
 #copy list of non-standard plugins to install
 COPY plugins.txt /usr/share/jenkins/plugins.txt
