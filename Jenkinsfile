@@ -10,7 +10,7 @@ node('docker-cloud'){
   stage 'integration tests'
   unstash "target-stash"
   def jenkinsTestImage = docker.build('jenkins:slack-test')
-  jenkinsTestImage.inside(){
-    sh "java -jar /usr/share/jenkins/jenkins-extracted/jenkins-cli.jar -s http://localhost:8080 build 'slack-test' -s"
-  }
+  sh "docker rm -f jenkins-slack"
+  sh "docker run -d -p 81:8080 --name jenkins-slack jenkins:slack-test"
+  sh "docker exec -t jenkins-slack java -jar /usr/share/jenkins/jenkins-extracted/jenkins-cli.jar -s http://localhost:8080 build 'slack-test' -s"
 }
