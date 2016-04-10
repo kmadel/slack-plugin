@@ -53,12 +53,3 @@ def j = Jenkins.instance
   </project>
 """
   def p = j.createProjectFromXML(name, new ByteArrayInputStream(configXml.getBytes("UTF-8")));
-  
-  Thread.start {
-        sleep 10000
-        println "--> setting agent port for jnlp"
-        def env = System.getenv()
-        int port = env['JENKINS_SLAVE_AGENT_PORT'].toInteger()
-        Jenkins.instance.setSlaveAgentPort(port)
-        println "--> setting agent port for jnlp... done"
-  }
