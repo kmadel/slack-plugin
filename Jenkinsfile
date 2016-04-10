@@ -12,6 +12,8 @@ node('docker-cloud'){
   def jenkinsTestImage = docker.build('jenkins:slack-test')
   stage 'integration tests'
   sh "docker rm -f jenkins-slack"
-  sh "docker run -a stdin -a stdout -p 81:8080 --name jenkins-slack jenkins:slack-test"
+  sh "docker run -d --name jenkins-slack jenkins:slack-test"
+  //sleep to wait for jenkins to come up
+  sleep 8
   sh "docker exec -t jenkins-slack java -jar /usr/share/jenkins/jenkins-extracted/jenkins-cli.jar -s http://localhost:8080 build 'slack-test' -s"
 }
