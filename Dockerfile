@@ -1,12 +1,10 @@
 FROM jenkins:1.642.4
 
 USER root
-RUN mkdir -p /data
-RUN mkdir -p /usr/share/jenkins/jenkins-extracted
-RUN unzip -d /usr/share/jenkins/jenkins-extracted /usr/share/jenkins/jenkins.war
-RUN cp /usr/share/jenkins/jenkins-extracted/WEB-INF/jenkins-cli.jar /data/jenkins-cli.jar
-RUN chown -R jenkins /data
-RUN rm -rf /usr/share/jenkins/jenkins-extracted
+RUN mkdir -p /usr/share/jenkins/jenkins-extracted && \
+  unzip -d /usr/share/jenkins/jenkins-extracted /usr/share/jenkins/jenkins.war &&\
+  chown -R jenkins:jenkins /usr/share/jenkins/jenkins-extracted
+  #rm -rf /usr/share/jenkins/jenkins-extracted
 
 #copy list of non-standard plugins to install
 COPY plugins.txt /usr/share/jenkins/plugins.txt
