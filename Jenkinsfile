@@ -8,8 +8,6 @@ node('docker-cloud'){
   }
   
   def jenkinsTestImage = docker.build('jenkins:slack-test')
-  jenkinsTestImage.inside(){
-    sh "curl http://localhost:8080/jnlpJars/jenkins-cli.jar -o jenkins-cli.jar"
-    sh "java -jar jenkins-cli.jar -s http://localhost:8080 build \"slack-test\" -s"
-  }
+  sh "docker run -d -p 81:8080 --name jenkins-slack jenkins:slack-test"
+  sh "docker exec -d jenkins-slack java -jar /var/jenkins_home/war/WEB-INF/jenkins-cli.jar -s http://localhost:8080 build \"slack-test\" -s"
 }
