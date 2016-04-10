@@ -11,7 +11,12 @@ node('docker-cloud'){
   unstash "target-stash"
   def jenkinsTestImage = docker.build('jenkins:slack-test')
   stage 'integration tests'
-  sh "docker rm -f jenkins-slack"
+  try {
+    sh "docker rm -f jenkins-slack"
+  } catch(e) {
+    echo e
+  }
+  
   sh "docker run -d --name jenkins-slack jenkins:slack-test"
   //wait for jenkins to come up
   //waitUntil {
