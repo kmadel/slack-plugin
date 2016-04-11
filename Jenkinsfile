@@ -30,4 +30,5 @@ node('docker-cloud'){
     }
   }
   sh "docker exec -t jenkins-slack java -jar /usr/share/jenkins/jenkins-extracted/jenkins-cli.jar -s http://localhost:8080/ build 'slack-test' -s"
+  sh "docker exec -t jenkins-slack java -jar /usr/share/jenkins/jenkins-extracted/jenkins-cli.jar -s http://localhost:8080/ build 'slack-migration-test' -s"
 }
