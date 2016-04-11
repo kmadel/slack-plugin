@@ -11,7 +11,6 @@ def j = Jenkins.instance
   println "--> creating $name"
 
   def configXml = """
-  <?xml version='1.0' encoding='UTF-8'?>
   <project>
     <actions/>
     <description></description>

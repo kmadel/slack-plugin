@@ -19,7 +19,7 @@ node('docker-cloud'){
   
   sh "docker run -d --name jenkins-slack jenkins:slack-test"
   //wait for jenkins to come up
-  sleep 8
+  sleep 5
   timeout(time: 1, unit: 'MINUTES') {
     waitUntil {
       writeFile file: 'jenkins-status', text: ''
