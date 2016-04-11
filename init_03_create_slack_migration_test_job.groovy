@@ -47,7 +47,12 @@ def j = Jenkins.instance
         <command>echo &apos;slack migration test&apos;</command>
       </hudson.tasks.Shell>
     </builders>
-    <publishers/>
+    <publishers>
+      <jenkins.plugins.slack.SlackNotifier plugin="slack@1.8.1">
+        <teamDomain>beedemo</teamDomain>
+        <authToken>qvk5UF4xov8aAG32OvDxU6WG</authToken>
+      </jenkins.plugins.slack.SlackNotifier>
+    </publishers>
     <buildWrappers/>
   </project>
 """
